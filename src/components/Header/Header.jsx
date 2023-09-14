@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import logo from '../../assets/img/logo.svg'
 import { colorFondo } from "../UI/variables";
+import { Link } from "react-router-dom";
 
 const StyleHeader = styled.header`
     display: flex;
@@ -35,12 +36,19 @@ export const ButtonHeader = styled.button`
 
 const Header = () =>{
     return (
+        <>
         <StyleHeader>
-        <LogoHeader src={logo} alt="logo aluraflix"/>
-        <ButtonHeader>
-            Nuevo Video
-        </ButtonHeader>
-    </StyleHeader>
+            <Link to='/'>
+                <LogoHeader href='/' src={logo} alt="logo aluraflix"/>
+            </Link>
+            
+            <Link to='/NewVideo'>
+                <ButtonHeader>
+                    Nuevo Video
+                </ButtonHeader> 
+            </Link>
+            </StyleHeader>
+        </>
     )
 }
 
