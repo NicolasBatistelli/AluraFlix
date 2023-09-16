@@ -9,6 +9,9 @@ const FooterStyled = styled.footer`
     display: flex;
     justify-content: center;
     height: 10rem;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 `
 
 const Footer = () =>{
