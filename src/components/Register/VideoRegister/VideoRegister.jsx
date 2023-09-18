@@ -4,26 +4,13 @@ import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { validateTitle, validateImage, validateCategory, validateDate } from './validations';
 
 export default function Form({handleSubmit}) {
-  const [title, setTitle] = useState('')
-  const [urlImage, setUrlImage] = useState('')
-  const [category, setCategory] = useState('')
-  const [releaseDate, setReleaseDate] = useState('')
-  const [errors, setErrors] = useState({
-    title: {
-      error: false,
-      message: 'The title cannot be empty'
-    }
-  })
-
-  function validateTitle(title){
-    if(title.length === 0){
-      return {title: {error:true, message: 'The title cannot be empty'}}
-    }else{
-      return {title: {error:false, message: ''}}
-    }
-  }
+  const [title, setTitle] = useState({value: '', valid: null})
+  const [urlImage, setUrlImage] = useState({value: '', valid: null})
+  const [category, setCategory] = useState({value: '', valid: null})
+  const [releaseDate, setReleaseDate] = useState({value: '', valid: null})
 
   handleSubmit = (values) => {
     console.log('APPJS:', values)
@@ -42,44 +29,63 @@ export default function Form({handleSubmit}) {
     }}
     handleSubmit={handleSubmit}>
 
-      <Typography variant='h3' align='center' component="h1">New Movie</Typography>
+      <Typography variant='h3' align='center' component="h1">New Anime</Typography>
 
       <TextField 
       id="title" 
       label="Title" 
       variant="outlined" 
       fullWidth margin='normal'
-      onChange={(e) => setTitle(e.target.value)}
-      value={title}
-      error={errors.title.error}
-      helperText={errors.title.error ? errors.title.message : ''}
-      onBlur={(e) => {
-        setErrors(validateTitle(e.target.value))
-        }}/>
+      value={title.value}
+      onChange={(input) => {
+        const value = input.target.value
+        const valid = validateTitle(value)
+        setTitle({value,valid})
+      }}
+      error={title.valid == false}
+      helperText={title.valid == false && 'The title cannot be empty'}/>
 
       <TextField 
       id="Urlimage" 
       label="Image URL" 
       variant="outlined" 
       fullWidth margin='normal'
-      value={urlImage}
-      onChange={(e) => setUrlImage(e.target.value)}/>
+      value={urlImage.value}
+      onChange={(input) => {
+        const value = input.target.value
+        const valid = validateImage(value)
+        setUrlImage({value,valid})
+      }}
+      error={urlImage.valid == false}
+      helperText={urlImage.valid == false && 'The URL is invalid or empty'}/>
 
       <TextField 
       id="category" 
       label="Category" 
       variant="outlined" 
       fullWidth margin='normal'
-      value={category}
-      onChange={(e) => setCategory(e.target.value)}/>
+      value={category.value}
+      onChange={(input) => {
+        const value = input.target.value
+        const valid = validateCategory(value)
+        setCategory({value,valid})
+      }}
+      error={category.valid == false}
+      helperText={category.valid == false && 'The category cannot be empty'}/>
 
       <TextField 
       id="releaseDate" 
       label="Release Date" 
       variant="outlined" 
       fullWidth margin='normal'
-      value={releaseDate}
-      onChange={(e) => setReleaseDate(e.target.value)}/>
+      value={releaseDate.value}
+      onChange={(input) => {
+        const value = input.target.value
+        const valid = validateDate(value)
+        setReleaseDate({value,valid})
+      }}
+      error={releaseDate.valid == false}
+      helperText={releaseDate.valid == false && 'The release date cannot be empty'}/>
 
       <Button variant="contained" type='submit'>Guardar</Button>
 
