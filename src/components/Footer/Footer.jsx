@@ -8,7 +8,7 @@ const FooterStyled = styled.footer`
     background-color: ${colorFondo};
     display: flex;
     justify-content: center;
-    height: 10rem;
+    height: 8rem;
     position: absolute;
     bottom: 0;
     width: 100%;

@@ -1,12 +1,20 @@
 import * as React from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { validateTitle, validateImage, validateCategory, validateDate } from './validations';
+import { validateTitle, validateImage, validateCategory, validateDate } from './validationsVideo';
+import { Box, styled } from '@mui/material';
 
-export default function Form({handleSubmit}) {
+const CustomizedButton = styled(Box)`
+display: flex;
+justify-content: space-between;
+margin-bottom: 1rem;
+`
+
+export default function FormVideo({handleSubmit}) {
   const [title, setTitle] = useState({value: '', valid: null})
   const [urlImage, setUrlImage] = useState({value: '', valid: null})
   const [category, setCategory] = useState({value: '', valid: null})
@@ -87,8 +95,13 @@ export default function Form({handleSubmit}) {
       error={releaseDate.valid == false}
       helperText={releaseDate.valid == false && 'The release date cannot be empty'}/>
 
+      <CustomizedButton>
       <Button variant="contained" type='submit'>Guardar</Button>
-
+      <Link to='/NewCategory'>
+        <Button variant="contained" type='submit'>Nueva Categoría</Button>
+      </Link>
+      </CustomizedButton>
+      
     </Container>
     
   );
